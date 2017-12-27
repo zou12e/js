@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JS</title>
+</head>
+
+<body>
+
+</body>
+<script type="text/javascript" src='./a.js' >
+	
+	document.write("1.不会打印内部js，应为已经引用外部js");
+
+</script>
+
+
+<script type="text/javascript">
+	
+
+	console.log(2 && 1); //打印 1
+	console.log(2 || 3); //打印 2
+
+
+	console.log(0 / 0);  //打印 NaN
+	console.log(1 / 0);  //打印 Infinity
+	console.log(-1 / 0); //打印 -Infinity
+
+
+	console.log(NaN == NaN);  //false
+	console.log(undefined == null);  //true
+
+
+</script>
+
+
+
+
+
+</html>
