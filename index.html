@@ -7,24 +7,22 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>JS</title>
 </head>
-
 <body>
 
 </body>
 <script type="text/javascript" src='./a.js' >
-	
-	document.write("1.不会打印内部js，应为已经引用外部js");
-
+	document.write("不会打印内部js，因为已经引用外部js");
 </script>
 
 
 <script type="text/javascript">
 	
-
+	console.log("--------------------&& & ||--------------------");
 	console.log(2 && 1); //打印 1
 	console.log(2 || 3); //打印 2
 
 
+	console.log("--------------------NaN undefined--------------------");
 	console.log(0 / 0);  //打印 NaN
 	console.log(1 / 0);  //打印 Infinity
 	console.log(-1 / 0); //打印 -Infinity
@@ -32,12 +30,66 @@
 
 	console.log(NaN == NaN);  //false
 	console.log(undefined == null);  //true
+	console.log(typeof(typeof(b)));  //string
 
+
+
+</script>
+<script type="text/javascript">
+	console.log("--------------------变量提升--------------------");
+	var a = 1;
+	function fun(){
+		if(!a){
+			var a =2;
+		}
+		console.log(a);    //2
+	} 
+	fun();
+</script>
+
+<script type="text/javascript">
+	
+	console.log("--------------------RegExp--------------------");
+
+
+	
+	//错误 Nothing to repeat
+
+	String.prototype.getKey = function(key) {
+		var reg = new RegExp("(&|\\?)"+key+"=([^&]*)(&|$)"),
+			mat = this.match(reg);
+			console.log(mat);
+		if(mat && mat.length>2)
+			return this.match(reg)[2];
+		return null;
+	}
+
+	var	url = "http://www.baidu.com?q=1&w=2&e=3",
+	 	q = url.getKey("q"),
+	    w = url.getKey("w"),
+	    e = url.getKey("e"),
+	    r = url.getKey("r");
+
+	  	console.log("q："+q);
+  		console.log("w："+w);
+		console.log("e："+e);
+		console.log("r："+r);
 
 </script>
 
 
+<script type="text/javascript">
+	
 
+	console.log("--------------------setTimeout--------------------");
+	for(var i=0;i<3;i++){
+		setTimeout(function(){
+			console.log(i); //333
+		},0);
+	}
+
+
+</script>
 
 
 </html>
