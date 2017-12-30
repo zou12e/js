@@ -77,6 +77,128 @@
 
 </script>
 
+<script type="text/javascript">
+
+	//高内聚 若耦合
+	console.log("--------------------arguments--------------------");
+
+	function argument(a,b){
+		console.log(arguments[0]);
+		a = 2;
+		console.log(arguments[0]);
+		arguments[0] = 3;
+		console.log(a);
+		console.log(arguments[1]);
+		b = 3;
+		console.log(arguments[1]);
+	}
+	argument(1);
+</script>
+
+
+<script type="text/javascript">
+	//预编译   
+	//函数声明 整体提升  
+	//变量 声明提升
+	console.log("--------------------预编译--------------------");
+
+
+	function b(b) {
+
+		console.log("b1:"+b);
+
+		var b = 123;
+
+		console.log("b2:"+b);
+
+		function b() {}
+
+		console.log("b3:"+b);
+
+		console.log("c4:"+c);
+
+		var c = function() {}
+		
+		console.log("c5:"+c);
+
+		function d() {}
+
+	}
+	b(1);
+
+	/*
+		预编译过程
+		1.声明Ao
+		AO {}
+		2.找形参，变量声明，赋值undefined  （if中也需要声明）
+		AO {
+			b: undefined,
+			c: undefined
+		}
+		3.实参形参统一
+		AO {
+			b: 1,
+			c: undefined
+		}
+		4.找函数声明，赋值函数体  （if中不需要赋值）
+		AO {
+			b: function b() {},
+			c: undefined
+			d: function d(){}
+		}
+		
+		解释过程
+		console.log("b1:"+b);  ----> b1:function b() {}
+		
+		var b = 123;           ----> AO {
+										b: 123,
+										c: undefined
+										d: function d(){}
+									 }
+		
+		console.log("b2:"+b);  ----> b2:123
+
+		function b() {}        ----> AO不变
+		
+		console.log("b3:"+b);  ----> b3:123
+
+		console.log("c4:"+c);  ----> c4:undefined
+
+		var c = function() {}  ----> AO {
+										b: 123,
+										c: function c() {}
+										d: function d(){}
+									 }
+
+		console.log("c5:"+c);  ----> c5:function c() {}
+ 
+	*/
+
+	//函数声明  function a(){}
+	//函数表达式 var a = function(){}
+	//变量提升 是预编译引起的
+
+	console.log("------------------------");
+
+	// function cc(){
+	// 	console.log("ff:"+ff); //打印 undefined
+	// 	if(true) {
+	// 		function ff() {}
+	// 	}
+	// }
+	// cc();
+
+
+	function cc(){
+		console.log(ff); //打印 undefined
+		if(true) {
+			function ff() {}
+		}
+	}
+	cc();
+
+</script>
+
 
 <script type="text/javascript">
 	
