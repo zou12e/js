@@ -4,7 +4,7 @@
 - DOM
 
 
-# <a href='https://zou12e.github.io/js/1.html' target='_block' >1.变量（1.html）</a>
+# <a href='https://zou12e.github.io/js/1.html' target='_blank' >1.变量（1.html）</a>
 - 原始值类型
 - 引用值类型
 
