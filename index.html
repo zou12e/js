@@ -7,96 +7,84 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>JS</title>
 </head>
-<body>
 
+<body>
 </body>
-<script type="text/javascript" src='./a.js' >
+<script type="text/javascript" src='./a.js'>
 	document.write("不会打印内部js，因为已经引用外部js");
 </script>
-
-
-<script type="text/javascript">
-	
+	<script type="text/javascript">
 	console.log("--------------------&& & ||--------------------");
 	console.log(2 && 1); //打印 1
 	console.log(2 || 3); //打印 2
 
 
 	console.log("--------------------NaN undefined--------------------");
-	console.log(0 / 0);  //打印 NaN
-	console.log(1 / 0);  //打印 Infinity
+	console.log(0 / 0); //打印 NaN
+	console.log(1 / 0); //打印 Infinity
 	console.log(-1 / 0); //打印 -Infinity
 
 
-	console.log(NaN == NaN);  //false
-	console.log(undefined == null);  //true
-	console.log(typeof(typeof(b)));  //string
-
-
-
+	console.log(NaN == NaN); //false
+	console.log(undefined == null); //true
+	console.log(typeof(typeof(b))); //string
 </script>
 <script type="text/javascript">
 	console.log("--------------------变量提升--------------------");
 	var a = 1;
-	function fun(){
-		if(!a){
-			var a =2;
-		}
-		console.log(a);    //2
-	} 
+
+	function fun() {
+	    if (!a) {
+	        var a = 2;
+	    }
+	    console.log(a); //2
+	}
 	fun();
 </script>
-
 <script type="text/javascript">
-	
 	console.log("--------------------RegExp--------------------");
 
 
-	
+
 	//错误 Nothing to repeat
 
 	String.prototype.getKey = function(key) {
-		var reg = new RegExp("(&|\\?)"+key+"=([^&]*)(&|$)"),
-			mat = this.match(reg);
-			console.log(mat);
-		if(mat && mat.length>2)
-			return this.match(reg)[2];
-		return null;
+	    var reg = new RegExp("(&|\\?)" + key + "=([^&]*)(&|$)"),
+	        mat = this.match(reg);
+	    console.log(mat);
+	    if (mat && mat.length > 2)
+	        return this.match(reg)[2];
+	    return null;
 	}
 
-	var	url = "http://www.baidu.com?q=1&w=2&e=3",
-	 	q = url.getKey("q"),
+	var url = "http://www.baidu.com?q=1&w=2&e=3",
+	    q = url.getKey("q"),
 	    w = url.getKey("w"),
 	    e = url.getKey("e"),
 	    r = url.getKey("r");
 
-	  	console.log("q："+q);
-  		console.log("w："+w);
-		console.log("e："+e);
-		console.log("r："+r);
-
-</script>
-
-<script type="text/javascript">
-
+	console.log("q：" + q);
+	console.log("w：" + w);
+	console.log("e：" + e);
+	console.log("r：" + r);
+	</script>
+	<script type="text/javascript">
 	//高内聚 若耦合
 	console.log("--------------------arguments--------------------");
 
-	function argument(a,b){
-		console.log(arguments[0]);
-		a = 2;
-		console.log(arguments[0]);
-		arguments[0] = 3;
-		console.log(a);
-		console.log(arguments[1]);
-		b = 3;
-		console.log(arguments[1]);
+	function argument(a, b) {
+	    console.log(arguments[0]);
+	    a = 2;
+	    console.log(arguments[0]);
+	    arguments[0] = 3;
+	    console.log(a);
+	    console.log(arguments[1]);
+	    b = 3;
+	    console.log(arguments[1]);
 	}
 	argument(1);
-</script>
-
-
-<script type="text/javascript">
+	</script>
+	<script type="text/javascript">
 	//预编译   
 	//函数声明 整体提升  
 	//变量 声明提升
@@ -105,74 +93,74 @@
 
 	function b(b) {
 
-		console.log("b1:"+b);
+	    console.log("b1:" + b);
 
-		var b = 123;
+	    var b = 123;
 
-		console.log("b2:"+b);
+	    console.log("b2:" + b);
 
-		function b() {}
+	    function b() {}
 
-		console.log("b3:"+b);
+	    console.log("b3:" + b);
 
-		console.log("c4:"+c);
+	    console.log("c4:" + c);
 
-		var c = function() {}
-		
-		console.log("c5:"+c);
+	    var c = function() {}
 
-		function d() {}
+	    console.log("c5:" + c);
+
+	    function d() {}
 
 	}
 	b(1);
 
 	/*
-		预编译过程
-		1.声明Ao
-		AO {}
-		2.找形参，变量声明，赋值undefined  （if中也需要声明）
-		AO {
-			b: undefined,
-			c: undefined
-		}
-		3.实参形参统一
-		AO {
-			b: 1,
-			c: undefined
-		}
-		4.找函数声明，赋值函数体  （if中不需要赋值）
-		AO {
-			b: function b() {},
-			c: undefined
-			d: function d(){}
-		}
-		
-		解释过程
-		console.log("b1:"+b);  ----> b1:function b() {}
-		
-		var b = 123;           ----> AO {
-										b: 123,
-										c: undefined
-										d: function d(){}
-									 }
-		
-		console.log("b2:"+b);  ----> b2:123
+			预编译过程
+			1.声明Ao
+			AO {}
+			2.找形参，变量声明，赋值undefined  （if中也需要声明）
+			AO {
+				b: undefined,
+				c: undefined
+			}
+			3.实参形参统一
+			AO {
+				b: 1,
+				c: undefined
+			}
+			4.找函数声明，赋值函数体  （if中不需要赋值）
+			AO {
+				b: function b() {},
+				c: undefined
+				d: function d(){}
+			}
+			
+			解释过程
+			console.log("b1:"+b);  ----> b1:function b() {}
+			
+			var b = 123;           ----> AO {
+											b: 123,
+											c: undefined
+											d: function d(){}
+										 }
+			
+			console.log("b2:"+b);  ----> b2:123
 
-		function b() {}        ----> AO不变
-		
-		console.log("b3:"+b);  ----> b3:123
+			function b() {}        ----> AO不变
+			
+			console.log("b3:"+b);  ----> b3:123
 
-		console.log("c4:"+c);  ----> c4:undefined
+			console.log("c4:"+c);  ----> c4:undefined
 
-		var c = function() {}  ----> AO {
-										b: 123,
-										c: function c() {}
-										d: function d(){}
-									 }
+			var c = function() {}  ----> AO {
+											b: 123,
+											c: function c() {}
+											d: function d(){}
+										 }
 
-		console.log("c5:"+c);  ----> c5:function c() {}
- 
-	*/
+			console.log("c5:"+c);  ----> c5:function c() {}
+	 
+		*/
 
 	//函数声明  function a(){}
 	//函数表达式 var a = function(){}
@@ -189,29 +177,96 @@
 	// cc();
 
 
-	function cc(){
-		console.log(ff); //打印 undefined
-		if(true) {
-			function ff() {}
-		}
+	function cc() {
+	    console.log(ff); //打印 undefined
+	    if (true) {
+	        function ff() {}
+	    }
 	}
 	cc();
-
 </script>
-
-
 <script type="text/javascript">
-	
 
-	console.log("--------------------setTimeout--------------------");
-	for(var i=0;i<3;i++){
-		setTimeout(function(){
-			console.log(i); //333
-		},0);
+	console.log("--------------------深度便利，广度遍历，深拷贝，浅拷贝--------------------");
+
+	console.log("-----------深度便利-------------");
+	function iterator(node){
+		if(node && node.children.length){
+			for(var i = 0;  i<node.children.length; i++){
+				console.log(node.children[i]);
+				iterator(node.children[i]);
+			}
+
+		}
+	}
+	// iterator(document.documentElement);
+	console.log("-----------广度遍历-------------");
+	function iterator(node){
+		var nodes = [],_node;
+		nodes.push(node);
+		while(nodes.length>0) {
+			_node = nodes.pop();
+			if(_node.children.length>0) {
+				for(var i =0; i<_node.children.length ; i++){
+					console.log(_node.children[i]);
+					nodes.push(_node.children[i]);
+				}
+			}
+		}
 	}
 
+	console.log("-----------浅遍历-------------");
+	function copy(obj) {
+		var _obj = {};
+		for(var i in obj){
+			_obj[i] = obj[i];
+		}
+		return _obj;
+	}
+
+	console.log("-----------深拷贝-------------");
+	function copy(obj,c) {
+		var _obj = c || {};
+		for(var i in obj){
+
+			console.log(obj.hasOwnProperty(i));
+
+			if(!obj.hasOwnProperty(i)){
+				continue;
+			}
+
+			if(typeof obj[i] =='object'){
+				
+				_obj[i] = obj[i].constructor == Array ?[]:{};
+
+				copy(obj[i],_obj[i]);
+
+			}else {
+				_obj[i] = obj[i];
+			}
+
+
+
+		}
+		return _obj;
+	}
+	var o = {x:1,y:[1,2,3]};
+	var n  =copy(o);
+	o.y.push(4);
+	console.log(n);
+
+
+
+
 
 </script>
-
+<script type="text/javascript">
+	console.log("--------------------setTimeout--------------------");
+	for (var i = 0; i < 3; i++) {
+	    setTimeout(function() {
+	        console.log(i); //333
+	    }, 0);
+	}
+</script>
 
 </html>

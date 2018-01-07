@@ -9,7 +9,8 @@
 - 引用值类型
 
 
-# 2.运算（2.html）
+
+# <a href='https://zou12e.github.io/js/2.html' target='_blank' >2.运算（2.html）</a>
 - 运算符
 - 比较运算符
 - 逻辑运算符
